@@ -1,0 +1,27 @@
+{
+  "name": "extract-git-commit-info",
+  "version": "0.1.0",
+  "description": "Extracts metadata of the current commit to a JSON file",
+  "keywords": [
+    "git",
+    "deployment",
+    "commit",
+    "cli",
+    "tool"
+  ],
+  "main": "index.js",
+  "bin": {
+    "extract-git-commit-info": "bin/extract-git-commit-info.js"
+  },
+  "scripts": {
+    "start": "bin/extract-git-commit-info"
+  },
+  "author": "Alexander Zigelski <hedgehog@ali.dj (http://ali.dj)",
+  "repsoitory": "dj-hedgehog/extract-git-commit-info",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "jsonfile": "^2.3.1"
+  }
+}
