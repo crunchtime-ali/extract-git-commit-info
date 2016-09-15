@@ -45,7 +45,7 @@ let matches = commitData.match(/\w*\s(\w{7})\w*\s(\S*\s\S*)\s(\d*).{15}(.*)/)
 
 const commitId = matches[1]
 const commitAuthor = matches[2]
-const commitDateTime = matches[3] * 1000
+const commitDateTime = new Date(matches[3] * 1000).toJSON()
 const commitMsg = matches[4]
 
 const outputPath = path.join(program.output, program.filename)
