@@ -37,25 +37,21 @@ try {
   })
 }
 
-// 1. Get commit message
-let commitMsg = fs.readFileSync(path.join(gitPath, 'COMMIT_EDITMSG'), 'utf-8')
+let commitMessages = fs.readFileSync(path.join(gitPath, 'logs', 'HEAD'), 'utf-8')
+commitMessages = commitMessages.split('\n')
 
-// 2. Get current Head ref
-let commitHead = fs.readFileSync(path.join(gitPath, 'HEAD'), 'utf-8')
+let commitData = commitMessages[commitMessages.length - 2]
+let matches = commitData.match(/\w*\s(\w{7})\w*\s(\S*\s\S*)\s(\d*).{15}(.*)/)
 
-commitMsg = commitMsg.split('\n')[0]
-commitHead = commitHead.split('\n')[0].split(' ')[1]
-
-// 3. Get commit ID from Head ref
-let commitId = fs.readFileSync(path.join(gitPath, commitHead), 'utf-8')
-commitId = commitId.substr(0, 7)
-
-// 4. Current date time
-const commitDateTime = new Date().toJSON()
+const commitId = matches[1]
+const commitAuthor = matches[2]
+const commitDateTime = matches[3] * 1000
+const commitMsg = matches[4]
 
 const outputPath = path.join(program.output, program.filename)
 const outputObj = {
   commitId,
+  commitAuthor,
   commitMsg,
   commitDateTime
 }
